@@ -1,0 +1,79 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom"
+        style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">My Courses</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="/home">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">My Courses</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- My Enrolled Courses Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+
+            <!-- Title -->
+            <div class="row mx-0 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center position-relative mb-5">
+                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">
+                            Enrolled Courses
+                        </h6>
+                        <h4 class="display-4">Continue Learning Your Courses</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Courses -->
+            <% if (myCourses.length === 0) { %>
+                <div class="text-center mb-5">
+                    <h3 class="text-muted">You have not enrolled in any courses yet.</h3>
+                </div>
+            <% } %>
+
+            <!-- Courses Grid -->
+            <div class="row">
+                <% myCourses.forEach((item) => { %>
+
+                    <div class="col-lg-4 col-md-6 pb-4">
+                        <a class="courses-list-item position-relative d-block overflow-hidden mb-2"
+                            href="/home/course/details/<%= item.courseId._id %>">
+
+                            <!-- Course Image -->
+                            <img class="img-fluid" src="<%= item.courseId.image.url %>" alt="<%= item.courseId.title %>">
+
+                            <!-- Overlay Content -->
+                            <div class="courses-text">
+                                <h4 class="text-center text-white px-3">
+                                    <%= item.courseId.title %>
+                                </h4>
+
+                                <div class="border-top w-100 mt-3">
+                                    <div class="d-flex justify-content-between p-4">
+                                        <!-- Instructor -->
+                                        <span class="text-white">
+                                            <i class="fa fa-user mr-2"></i>
+                                            <%= item.courseId.instructor.fullName %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+
+                <% }) %>
+            </div>
+
+        </div>
+    </div>
+    <!-- My Enrolled Courses End -->
+
+</body>

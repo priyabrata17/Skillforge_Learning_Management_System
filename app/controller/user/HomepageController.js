@@ -162,6 +162,20 @@ class HomepageController {
     });
   }
 
+  //My Courses
+  async myCourses(req, res) {
+    const myCourses = await EnrollmentModel.find({
+      studentId: req.user._id,
+    }).populate({
+      path: "courseId",
+      populate: {
+        path: "instructor",
+      },
+    });
+
+    return res.render("myCourses", { myCourses });
+  }
+
   //Feature Section
   async featureSection(req, res) {
     const allFeatures = await FeatureModel.find({});

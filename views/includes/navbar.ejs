@@ -16,6 +16,10 @@
                 <a href="/home/features" class="nav-item nav-link">Features</a>
                 <a href="/home/team" class="nav-item nav-link">Instructors</a>
                 <a href="/home/contact" class="nav-item nav-link">Contact</a>
+                <% if (currUser) { %>
+                    <a href="/home/my-courses" class="nav-item nav-link">My Courses</a>
+                <% } %>
+
             </div>
             <% if(currUser) { %>
                 <a href="/auth/logout" class="btn btn-danger py-2 px-4 d-none d-lg-block">Logout</a>

@@ -20,6 +20,9 @@ router.get("/home/courses", wrapAsync(HomepageController.courseSection));
 //Course Details
 router.get("/home/course/details/:courseId", userAuthCheck, wrapAsync(HomepageController.courseDetailsSection));
 
+//My Courses
+router.get("/home/my-courses", userAuthCheck, wrapAsync(HomepageController.myCourses));
+
 //Features
 router.get("/home/features", wrapAsync(HomepageController.featureSection));
 
