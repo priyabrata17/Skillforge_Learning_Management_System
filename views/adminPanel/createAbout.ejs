@@ -1,0 +1,62 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <h1 class="h3 mb-4 text-gray-800">Add New About Section</h1>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Create About</h6>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/admin/create/about" method="POST" enctype="multipart/form-data">
+
+                        <div class="row">
+
+                            <!-- Title -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="Enter about title" required>
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">About Image</label>
+                                <input type="file" name="image" class="form-control-file" required>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Description -->
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold">Description</label>
+                                <textarea name="description" class="form-control" rows="4"
+                                    placeholder="Write about section description..."
+                                    required></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Create About
+                            </button>
+
+                            <a href="/admin/all-about" class="btn btn-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </body>

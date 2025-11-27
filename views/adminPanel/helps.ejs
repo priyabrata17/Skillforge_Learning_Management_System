@@ -1,0 +1,130 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-4 text-gray-800">All Help Requests</h1>
+
+            <!-- Help Table -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Help Requests</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% if (allHelps.length===0) { %>
+                                    <tr>
+                                        <td colspan="7" class="text-center">No help requests found</td>
+                                    </tr>
+                                    <% } %>
+
+                                        <% allHelps.forEach(help=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= help.fullName %>
+                                                </td>
+                                                <td>
+                                                    <%= help.email %>
+                                                </td>
+                                                <td>
+                                                    <%= help.subject %>
+                                                </td>
+                                                <td>
+                                                    <%= help.message %>
+                                                </td>
+
+                                                <td>
+                                                    <% if (help.status==="pending" ) { %>
+                                                        <span class="badge badge-warning">Pending</span>
+                                                        <% } else { %>
+                                                            <span class="badge badge-success">Resolved</span>
+                                                            <% } %>
+                                                </td>
+
+                                                <td>
+                                                    <%= help.createdAt.toLocaleString() %>
+                                                </td>
+
+                                                <td class="text-center">
+
+                                                    <!-- Update Status Button -->
+                                                    <form action="/admin/update/help/<%= help._id %>?_method=PATCH"
+                                                        method="POST" class="d-inline">
+                                                        <button type="submit"
+                                                            class="btn btn-sm <%= help.status === 'pending' ? 'btn-success' : 'btn-warning' %> mb-1">
+                                                            <% if (help.status==="pending" ) { %>
+                                                                Mark as Resolved
+                                                                <% } else { %>
+                                                                    Mark as Pending
+                                                                    <% } %>
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Delete Button -->
+                                                    <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                                        data-target="#deleteHelpModal_<%= help._id %>">
+                                                        Delete
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteHelpModal_<%= help._id %>" tabindex="-1"
+                                                role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Confirm Delete</h5>
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                <span>&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete this help request?
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <form
+                                                                action="/admin/delete/help/<%= help._id %>?_method=DELETE"
+                                                                method="POST">
+                                                                <button type="submit"
+                                                                    class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Cancel</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Modal -->
+
+                                            <% }) %>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </body>

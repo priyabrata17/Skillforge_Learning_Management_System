@@ -1,0 +1,181 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <!-- Heading -->
+            <h1 class="h3 mb-2 text-gray-800">All Enrollments</h1>
+            <p class="mb-4">
+                Manage all student enrollments. You can approve, reject or remove enrollments from here.
+            </p>
+
+            <!-- Card -->
+            <div class="card shadow mb-4">
+
+                <!-- Header -->
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Enrollment List</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-hover align-middle" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Student Details</th>
+                                    <th>Course</th>
+                                    <th>Enrolled On</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <% if (enrollments && enrollments.length> 0) { %>
+                                    <% enrollments.forEach((enrollment, index)=> { %>
+
+                                        <tr>
+                                            <td>
+                                                <%= index + 1 %>
+                                            </td>
+
+                                            <!-- Student -->
+                                            <td>
+                                                <div class="d-flex align-items-center">
+
+                                                    <!-- Student Image -->
+                                                    <img src="<%= enrollment.studentDetails?.image?.url || '/img/default.png' %>"
+                                                        style="width:50px; height:50px; border-radius:50%; object-fit:cover; margin-right:10px;">
+
+                                                    <!-- Name + Email -->
+                                                    <div class="d-flex flex-column">
+                                                        <span class="font-weight-bold">
+                                                            <%= enrollment.studentDetails?.fullName %>
+                                                        </span>
+                                                        <small class="text-muted">
+                                                            <%= enrollment.email %>
+                                                        </small>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+
+
+                                            <!-- Course -->
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="<%= enrollment.courseDetails?.image?.url || '/img/default-course.png' %>"
+                                                        style="width:60px; height:60px; border-radius:6px; object-fit:cover; margin-right:10px;">
+                                                    <span>
+                                                        <%= enrollment.courseDetails?.title %>
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <!-- Enrolled On -->
+                                            <td>
+                                                <%= enrollment.enrolledOn.toLocaleString('en-IN') %>
+                                            </td>
+
+                                            <!-- Status -->
+                                            <td>
+                                                <% if (enrollment.status==='approved' ) { %>
+                                                    <span class="badge badge-success px-3 py-2">Approved</span>
+                                                    <% } else { %>
+                                                        <span class="badge badge-warning px-3 py-2">Pending</span>
+                                                        <% } %>
+                                            </td>
+
+                                            <!-- Actions -->
+                                            <td class="text-center">
+
+                                                <!-- Patch Button -->
+                                                <form
+                                                    action="/admin/update/enrollment/<%= enrollment._id %>?_method=PATCH"
+                                                    method="POST" class="d-inline">
+                                                    <button type="submit"
+                                                        class="btn btn-sm <%= enrollment.status === 'pending' ? 'btn-success' : 'btn-warning' %> mr-1 mb-2">
+                                                        <% if (enrollment.status==="pending" ) { %>
+                                                            Approve
+                                                            <% } else { %>
+                                                                Set Pending
+                                                                <% } %>
+                                                    </button>
+                                                </form>
+
+
+                                                <!-- Delete Button -->
+                                                <button class="btn btn-sm btn-danger mb-2" data-toggle="modal"
+                                                    data-target="#deleteEnrollmentModal_<%= enrollment._id %>">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </button>
+
+                                            </td>
+                                        </tr>
+
+                                        <% }) %>
+
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="6" class="text-center text-muted">No enrollments found.
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Modals -->
+            <% if (enrollments && enrollments.length> 0) { %>
+                <% enrollments.forEach((enrollment)=> { %>
+
+                    <div class="modal fade" id="deleteEnrollmentModal_<%= enrollment._id %>" tabindex="-1"
+                        role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title">Delete Enrollment</h5>
+                                    <button type="button" class="close text-white" data-dismiss="modal">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    Are you sure you want to remove the enrollment of
+                                    <strong>
+                                        <%= enrollment.studentDetails?.fullName %>
+                                    </strong>
+                                    for the course
+                                    <strong>
+                                        <%= enrollment.courseDetails?.title %>
+                                    </strong>?
+                                    <br>This action cannot be undone.
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                                    <form action="/admin/delete/enrollment/<%= enrollment._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                        <% } %>
+
+        </div>
+    </body>

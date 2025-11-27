@@ -1,0 +1,82 @@
+<% layout("layouts/boilerplateTwo") %>
+
+    <body class="bg-gradient-primary">
+
+        <div class="container">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                </div>
+                                <!-- For Errors -->
+                                <% if(errors && errors.length> 0){ %>
+                                    <div class="row mb-3 justify-content-center">
+                                        <div class="col-6">
+                                            <ul class="alert alert-danger" style="list-style-position: inside;">
+                                                <% errors.forEach(err=> {%>
+                                                    <li>
+                                                        <%= err.message %>
+                                                    </li>
+                                                    <% }) %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                        <form class="user" action="/auth/register" method="POST"
+                                            enctype="multipart/form-data">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label class="form-label fw-semibold">Full Name</label>
+                                                    <input type="text" name="fullName"
+                                                        class="form-control form-control-user" id="exampleFirstName"
+                                                        placeholder="Enter Full Name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label fw-semibold">Email</label>
+                                                <input type="email" name="email" class="form-control form-control-user"
+                                                    id="exampleInputEmail" placeholder="Email Address">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label class="form-label fw-semibold">Password</label>
+                                                    <input type="password" name="password"
+                                                        class="form-control form-control-user" id="exampleInputPassword"
+                                                        placeholder="Password">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="form-label fw-semibold">Confirm Password</label>
+                                                    <input type="password" name="confirmPassword"
+                                                        class="form-control form-control-user"
+                                                        id="exampleRepeatPassword" placeholder="Repeat Password">
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Profile Image -->
+                                            <div class="mb-4">
+                                                <label class="form-label fw-semibold">Profile Image</label>
+                                                <input type="file" name="image" class="form-control form-control-user pb-5">
+                                            </div>
+                                            <button class="btn btn-primary btn-user btn-block">Register</button>
+                                        </form>
+                                        <hr>
+                                        <div class="text-center">
+                                            <a class="small" href="/account/forget-password-form">Forgot Password?</a>
+                                        </div>
+                                        <div class="text-center">
+                                            <a class="small" href="/auth/login-form">Already have an account? Login!</a>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>

@@ -1,0 +1,29 @@
+<!-- Navbar Start -->
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="/home" class="navbar-brand ml-lg-3">
+            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>SkillForge</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mx-auto py-0">
+                <a href="/home" class="nav-item nav-link active">Home</a>
+                <a href="/home/about" class="nav-item nav-link">About</a>
+                <a href="/home/courses" class="nav-item nav-link">Courses</a>
+                <a href="/home/enrollment-page" class="nav-item nav-link">Enrollment</a>
+                <a href="/home/features" class="nav-item nav-link">Features</a>
+                <a href="/home/team" class="nav-item nav-link">Instructors</a>
+                <a href="/home/contact" class="nav-item nav-link">Contact</a>
+            </div>
+            <% if(currUser) { %>
+                <a href="/auth/logout" class="btn btn-danger py-2 px-4 d-none d-lg-block">Logout</a>
+                <% }else{ %>
+                    <a href="/auth/registration-form" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join With
+                        Us</a>
+                    <% } %>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->

@@ -1,0 +1,57 @@
+<% layout("layouts/boilerplate") %>
+
+    <body>
+        <!-- Header Start -->
+        <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom"
+            style="margin-bottom: 90px;">
+            <div class="container text-center py-5">
+                <h1 class="text-white display-1">Enrollments</h1>
+                <div class="d-inline-flex text-white mb-5">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="/home">Home</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Enrollment</p>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!-- Enrollment Form -->
+        <div class="row justify-content-center bg-image mx-0 mb-5">
+                <div class="col-lg-6 py-5">
+                    <div class="bg-white p-5 my-5">
+                        <h1 class="text-center mb-4">Enroll Now To Your Favourite Course</h1>
+                        <form action="/home/create/enrollment" method="post">
+                            <div class="form-row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control bg-light border-0" name="fullName"
+                                            placeholder="Your Name" style="padding: 30px 20px;">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control bg-light border-0" name="email"
+                                            placeholder="Your Email" style="padding: 30px 20px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select name="courseId" class="custom-select bg-light border-0 px-3" style="height: 60px;">
+                                            <option selected>Select A Course</option>
+                                            <% allCourses.forEach((course) => { %>
+                                                <option value="<%= course._id.toString() %>"><%= course.title %></option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-primary btn-block" type="submit" style="height: 60px;">Enroll Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </body>

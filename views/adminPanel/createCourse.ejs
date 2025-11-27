@@ -1,0 +1,120 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <h1 class="h3 mb-4 text-gray-800">Add New Course</h1>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Create Course</h6>
+                </div>
+
+                <div class="card-body">
+
+                    <% if(errors && errors.length> 0){ %>
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-6">
+                                <ul class="alert alert-danger" style="list-style-position: inside;">
+                                    <% errors.forEach(err=> {%>
+                                        <li>
+                                            <%= err.message %>
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                            </div>
+                        </div>
+                        <% } %>
+
+                            <form action="/admin/create/course" method="POST" enctype="multipart/form-data">
+
+                                <div class="row">
+
+                                    <!-- Title -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Course Title</label>
+                                        <input type="text" name="title" class="form-control"
+                                            placeholder="Enter course name"
+                                            value="<%= oldInput ? oldInput.title : '' %>" required>
+                                    </div>
+
+                                    <!-- Skill Level -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Skill Level</label>
+                                        <select name="skillLevel" class="form-control" required>
+                                            <option value="">Select Skill Level</option>
+                                            <option value="Beginner">Beginner</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Advanced">Advanced</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <!-- Description -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Description</label>
+                                        <input type="text" name="description" class="form-control"
+                                            placeholder="Short course description"
+                                            value="<%= oldInput ? oldInput.title : '' %>" required />
+                                    </div>
+
+                                    <!-- Certificate -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Certificate</label>
+                                        <select name="certificate" class="form-control" required>
+                                            <option value="">Select Certificate Option</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <!-- Instructor Dropdown -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Instructor</label>
+                                        <select name="instructor" class="form-control" required>
+                                            <option value="">Select Instructor</option>
+
+                                            <% if (allInstructors && allInstructors.length> 0) { %>
+                                                <% allInstructors.forEach(ins=> { %>
+                                                    <option value="<%= ins._id %>">
+                                                        <%= ins.fullName %> - [<%= ins.roleDescription %>]
+                                                    </option>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <option disabled>No instructors available</option>
+                                                            <% } %>
+
+                                        </select>
+                                    </div>
+
+                                    <!-- Image Upload -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Course Image</label>
+                                        <input type="file" name="image" class="form-control-file" required>
+                                    </div>
+
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Create Course
+                                    </button>
+
+                                    <a href="/admin/all-course" class="btn btn-secondary ml-2">
+                                        Cancel
+                                    </a>
+                                </div>
+                            </form>
+                </div>
+            </div>
+
+        </div>
+    </body>

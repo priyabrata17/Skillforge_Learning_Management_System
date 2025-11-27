@@ -1,0 +1,77 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+
+    <!-- Page Header -->
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom"
+        style="margin-bottom: 40px;">
+        <div class="container text-center py-4">
+            <h1 class="text-white display-4">
+                <%= allSubjects.length > 0 ? allSubjects[0].courseId.title : "Course Classroom" %>
+            </h1>
+        </div>
+    </div>
+
+    <div class="container py-5">
+
+        <% 
+            // Pick which video to show
+            let currentVideo = typeof selectedVideo !== "undefined" ? selectedVideo : allSubjects[0];
+        %>
+
+        <!-- ============================
+            VIDEO PLAYER
+        =============================== -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="embed-responsive embed-responsive-16by9 rounded shadow">
+                    <iframe class="embed-responsive-item"
+                        src="https://www.youtube.com/embed/<%= currentVideo.videoUrl %>"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================
+            VIDEO DESCRIPTION
+        =============================== -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3><%= currentVideo.title %></h3>
+                <p class="mt-3"><%= currentVideo.description %></p>
+            </div>
+        </div>
+
+        <!-- ============================
+            VIDEO LIST SECTION
+        =============================== -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h4 class="mb-3">Video Playlist</h4>
+
+                <ul class="list-group">
+
+                    <% allSubjects.forEach(video => { %>
+
+                    <a href="/classroom/<%= video.courseId._id %>/video/<%= video._id %>"
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center
+                        <%= currentVideo._id.toString() === video._id.toString() ? 'active text-white' : '' %>">
+
+                        <span><%= video.title %></span>
+
+                        <% if (currentVideo._id.toString() === video._id.toString()) { %>
+                        <span class="badge badge-light text-dark">Now Playing</span>
+                        <% } %>
+
+                    </a>
+
+                    <% }) %>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>

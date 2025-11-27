@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Summary</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+  <div class="container py-4">
+
+    <!-- Main Title -->
+    <h1 class="text-center mb-1 text-primary fw-bold">Summary Report</h1>
+
+    <!-- Date -->
+    <p class="text-center mb-4 text-secondary">
+      [<%= new Date().toLocaleDateString("en-IN") %>]
+    </p>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-danger">Total Users</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= totalUsers %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-success">Instructors</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= noOfInstructors %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-warning">Students</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= noOfStudents %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-info">Total Courses</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= noOfCourses %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-primary">All Subjects</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= noOfSubjects %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-secondary">Enrollments</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= noOfEnrollments %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-danger">Pending Requests</h5>
+            <p class="display-6 fw-bold text-dark">
+              <%= noOfPendingRequest %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="mt-5 text-end text-primary fw-semibold">
+      — Skillforge Team
+    </p>
+  </div>
+
+  <!-- Bootstrap Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

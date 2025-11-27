@@ -1,0 +1,122 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <h1 class="h3 mb-4 text-gray-800">Update Course</h1>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Course Details</h6>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/admin/update/course/<%= existingCourse._id %>?_method=PATCH" method="POST"
+                        enctype="multipart/form-data">
+
+                        <div class="row">
+
+                            <!-- Title -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Course Title</label>
+                                <input type="text" name="title" class="form-control" value="<%= existingCourse.title %>"
+                                    required>
+                            </div>
+
+                            <!-- Skill Level -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Skill Level</label>
+                                <select name="skillLevel" class="form-control" required>
+                                    <option value="">Select Skill Level</option>
+                                    <option value="Beginner" <%=(existingCourse.skillLevel==='Beginner' ) ? 'selected'
+                                        : '' %>>Beginner</option>
+                                    <option value="Intermediate" <%=(existingCourse.skillLevel==='Intermediate' )
+                                        ? 'selected' : '' %>>Intermediate</option>
+                                    <option value="Advanced" <%=(existingCourse.skillLevel==='Advanced' ) ? 'selected'
+                                        : '' %>>Advanced</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Description -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Description</label>
+                                <input type="text" name="description" class="form-control"
+                                    value="<%= existingCourse.description %>" required />
+                            </div>
+
+                            <!-- Certificate -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Certificate</label>
+                                <select name="certificate" class="form-control" required>
+                                    <option value="">Select Option</option>
+                                    <option value="Yes" <%=existingCourse.certificate==='Yes' ? 'selected' : '' %>>Yes
+                                    </option>
+                                    <option value="No" <%=existingCourse.certificate==='No' ? 'selected' : '' %>
+                                        >No</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Instructor -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Instructor</label>
+                                <select name="instructor" class="form-control" required>
+                                    <option value="">Select Instructor</option>
+
+                                    <% if (allInstructors && allInstructors.length> 0) { %>
+                                        <% allInstructors.forEach(ins=> { %>
+                                            <option value="<%= ins._id %>"
+                                                <%=ins._id.toString() === existingCourse.instructor.toString()
+                                                ? 'selected' : '' %>>
+                                                <%= ins.fullName %> - [<%= ins.roleDescription %>]
+                                            </option>
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <option disabled>No instructors available</option>
+                                                    <% } %>
+
+                                </select>
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Course Image</label> <br>
+
+                                <% if(existingCourse.image){ %>
+                                    <img src="<%= existingCourse.image.url %>" alt="Course Image"
+                                        width="100" class="mb-2 rounded">
+                                    <% } %>
+
+                                        <input type="file" name="image" class="form-control-file">
+                                        <small class="text-muted">Upload only if you want to change
+                                            image</small>
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-edit"></i> Update Course
+                            </button>
+
+                            <a href="/admin/all-course" class="btn btn-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </body>

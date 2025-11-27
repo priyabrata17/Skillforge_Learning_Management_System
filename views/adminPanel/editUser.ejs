@@ -1,0 +1,61 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+  <body>
+    <div class="container-fluid">
+
+      <h1 class="h3 mb-4 text-gray-800">Update User Role</h1>
+
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Edit User Role</h6>
+          </h6>
+        </div>
+
+        <div class="card-body">
+
+          <form action="/admin/update/user/<%= existingUser._id %>?_method=PATCH" method="POST">
+
+            <div class="row">
+
+              <!-- Image -->
+              <div class="col-12 mb-3">
+                <% if(existingUser.image){ %>
+                  <img src="<%= existingUser.image.url %>" alt="Course Image" width="100" class="mb-2 rounded">
+                  <% } %>
+                    <h6 class="m-0 text-secondary mt-2"><%= existingUser.fullName %>
+              </div>
+
+              <!-- Role -->
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Role</label>
+                <select name="role" class="form-control" required>
+                  <option value="admin" <%=existingUser.role==="admin" ? "selected" : "" %>>Admin</option>
+                  <option value="teacher" <%=existingUser.role==="teacher" ? "selected" : "" %>>Teacher</option>
+                  <option value="student" <%=existingUser.role==="student" ? "selected" : "" %>>Student</option>
+                </select>
+              </div>
+
+              <!-- Role Description -->
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Role Description</label>
+                <input type="text" name="roleDescription" class="form-control"
+                  placeholder="Describe user responsibilities" value="<%= existingUser.roleDescription || '' %>" />
+              </div>
+
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Update
+              </button>
+              <a href="/admin/all-user" class="btn btn-secondary ml-2">Cancel</a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </body>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Skillforge Admin</title>
+
+    <!-- Fonts & Styles -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 4.4.1 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/dashboard">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Skillforge Admin</div>
+            </a>
+
+            <hr class="sidebar-divider my-0">
+
+            <!-- Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin/dashboard">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Interface -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <hr class="sidebar-divider mt-2">
+
+            <!-- Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-user">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <!-- Courses -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-course">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Courses</span>
+                </a>
+            </li>
+
+            <!-- Subjects -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-subject">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Subjects</span>
+                </a>
+            </li>
+
+            <!-- Enrollments -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-enrollment">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Enrollments</span>
+                </a>
+            </li>
+
+            <!-- About -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-about">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>About</span>
+                </a>
+            </li>
+
+            <!-- Features -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-feature">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Features</span>
+                </a>
+            </li>
+
+            <!-- Contacts -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all-help">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Contacts</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Toggle Button -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Toggle Button (mobile) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- User Menu -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <%= currAdmin ? currAdmin.fullName : "admin" %> <br>
+                                        <%= currAdmin ? currAdmin.email : "" %>
+                                </span>
+
+                                <img class="img-profile rounded-circle"
+                                    src="<%= currAdmin && currAdmin.image ? currAdmin.image : '/img/undraw_profile.svg' %>">
+                            </a>
+
+
+                            <!-- Dropdown -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2"></i>Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2"></i>Activity Log
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- Logout Modal Trigger -->
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>Logout
+                                </a>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- End Topbar -->
+
+                <!-- Page Content (Empty for now) -->
+                <div class="container-fluid">
+                    <!-- YOUR PAGE CONTENT HERE -->
+                    <div class="container">
+                        <%- include("../includes/flashMessage") %>
+                    </div>
+                    <%- body %>
+                </div>
+
+            </div>
+            <!-- End Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white mt-auto">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Skillforge 2025</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- End Content Wrapper -->
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Select "Logout" below if you are ready to end your current session.
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+                        <!-- REAL LOGOUT LINK -->
+                        <a class="btn btn-primary" href="/admin/logout">Logout</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End Page Wrapper -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

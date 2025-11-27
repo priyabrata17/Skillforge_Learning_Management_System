@@ -1,0 +1,70 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <h1 class="h3 mb-4 text-gray-800">Update About Section</h1>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit About Details</h6>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/admin/update/about/<%= existingAbout._id %>?_method=PATCH" method="POST"
+                        enctype="multipart/form-data">
+
+                        <div class="row">
+
+                            <!-- Title -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Title</label>
+                                <input type="text" name="title" class="form-control" value="<%= existingAbout.title %>"
+                                    required>
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">About Image</label> <br>
+
+                                <% if(existingAbout.image){ %>
+                                    <img src="<%= existingAbout.image.url %>" alt="About Image" width="100"
+                                        class="mb-2 rounded">
+                                    <% } %>
+
+                                        <input type="file" name="image" class="form-control-file">
+                                        <small class="text-muted">Upload only if you want to change the image</small>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Description -->
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold">Description</label>
+                                <textarea name="description" class="form-control" rows="4"
+                                    required><%= existingAbout.description %></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-edit"></i> Update About
+                            </button>
+
+                            <a href="/admin/all-about" class="btn btn-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </body>

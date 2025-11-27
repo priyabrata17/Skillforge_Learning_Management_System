@@ -1,0 +1,108 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+    <body>
+        <div class="container-fluid">
+
+            <h1 class="h3 mb-4 text-gray-800">Update Feature Section</h1>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Feature Details</h6>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/admin/update/feature/<%= existingFeature._id %>?_method=PATCH" method="POST"
+                        enctype="multipart/form-data">
+
+                        <div class="row">
+
+                            <!-- Image Upload -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Feature Image</label> <br>
+
+                                <% if(existingFeature.image){ %>
+                                    <img src="<%= existingFeature.image.url %>" alt="Feature Image" width="100"
+                                        class="mb-2 rounded">
+                                    <% } %>
+
+                                        <input type="file" name="image" class="form-control-file">
+                                        <small class="text-muted">Upload only if you want to change the image</small>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Title One -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Title One</label>
+                                <input type="text" name="titleOne" class="form-control"
+                                    value="<%= existingFeature.titleOne %>" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Description One</label>
+                                <textarea name="descriptionOne" class="form-control" rows="2"
+                                    required><%= existingFeature.descriptionOne %></textarea>
+                            </div>
+
+                            <!-- Title Two -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Title Two</label>
+                                <input type="text" name="titleTwo" class="form-control"
+                                    value="<%= existingFeature.titleTwo %>" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Description Two</label>
+                                <textarea name="descriptionTwo" class="form-control" rows="2"
+                                    required><%= existingFeature.descriptionTwo %></textarea>
+                            </div>
+
+                            <!-- Title Three -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Title Three</label>
+                                <input type="text" name="titleThree" class="form-control"
+                                    value="<%= existingFeature.titleThree %>" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Description Three</label>
+                                <textarea name="descriptionThree" class="form-control" rows="2"
+                                    required><%= existingFeature.descriptionThree %></textarea>
+                            </div>
+
+                            <!-- Title Four -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Title Four</label>
+                                <input type="text" name="titleFour" class="form-control"
+                                    value="<%= existingFeature.titleFour %>" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Description Four</label>
+                                <textarea name="descriptionFour" class="form-control" rows="2"
+                                    required><%= existingFeature.descriptionFour %></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-edit"></i> Update Feature
+                            </button>
+
+                            <a href="/admin/all-feature" class="btn btn-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </body>

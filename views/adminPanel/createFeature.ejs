@@ -1,0 +1,96 @@
+<% layout("layouts/boilerplateAdminPanel") %>
+
+<body>
+  <div class="container-fluid">
+
+    <h1 class="h3 mb-4 text-gray-800">Add New Feature Section</h1>
+
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Create Feature</h6>
+      </div>
+
+      <div class="card-body">
+
+        <form action="/admin/create/feature" method="POST" enctype="multipart/form-data">
+
+          <div class="row">
+
+            <!-- Image Upload -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Feature Image</label>
+              <input type="file" name="image" class="form-control-file" required>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <!-- Feature 1 -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Title One</label>
+              <input type="text" name="titleOne" class="form-control" placeholder="Enter feature title" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Description One</label>
+              <textarea name="descriptionOne" class="form-control" rows="2"
+                placeholder="Enter feature description..." required></textarea>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Title Two</label>
+              <input type="text" name="titleTwo" class="form-control" placeholder="Enter feature title" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Description Two</label>
+              <textarea name="descriptionTwo" class="form-control" rows="2"
+                placeholder="Enter feature description..." required></textarea>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Title Three</label>
+              <input type="text" name="titleThree" class="form-control" placeholder="Enter feature title" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Description Three</label>
+              <textarea name="descriptionThree" class="form-control" rows="2"
+                placeholder="Enter feature description..." required></textarea>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Title Four</label>
+              <input type="text" name="titleFour" class="form-control" placeholder="Enter feature title" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-bold">Description Four</label>
+              <textarea name="descriptionFour" class="form-control" rows="2"
+                placeholder="Enter feature description..." required></textarea>
+            </div>
+
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Create Feature
+            </button>
+
+            <a href="/admin/all-feature" class="btn btn-secondary ml-2">
+              Cancel
+            </a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</body>
