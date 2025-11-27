@@ -11,7 +11,7 @@ class EnrollmentController {
 
     const enrollments = await EnrollmentModel.aggregate([
       {
-        $match: {}, // your conditions here
+        $match: {},
       },
       {
         $sort: {
