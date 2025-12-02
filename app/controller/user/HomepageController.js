@@ -73,7 +73,7 @@ class HomepageController {
   async courseSection(req, res) {
     //paginate
     const page = parseInt(req.query.page) || 1;
-    const limit = 6;
+    const limit = 3;
     const options = {
       page,
       limit,

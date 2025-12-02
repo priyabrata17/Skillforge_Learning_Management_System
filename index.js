@@ -9,17 +9,19 @@ const flash = require("connect-flash");
 const flashMessage = require("./app/middleware/FlashMessage");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-
+const { createServer } = require("node:http");
+const { Server } = require("socket.io");
 
 //++++++++++++++++++++++++  Executing required functions  +++++++++++++++++++++++++++
 const app = express();
 dbCon();
+const server = createServer(app);
+const io = new Server(server);
 
 //Set view engine to EJS
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
-
 
 //+++++++++++++++++++++  Parsing data ++++++++++++++++++++++++++++++
 app.use(express.urlencoded({ extended: true }));
@@ -30,11 +32,9 @@ app.use(expressSession);
 app.use(flash());
 app.use(flashMessage);
 
-
 //++++++++++++++++++++++  Serve Static Files  +++++++++++++++++++++++++++
 app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "public")));
-
 
 //+++++++++++++++++++++++  Using routes  ++++++++++++++++++++++++++
 
@@ -46,7 +46,6 @@ app.use(HomeRouter);
 //UserRouter
 const UserRouter = require("./app/router/user/UserRouter");
 app.use(UserRouter);
-
 
 //------------------------- Admin Routes -----------------------
 const AdminDashboardRouter = require("./app/router/admin/AdminDashboardRouter");
@@ -73,9 +72,27 @@ app.use(AdminEnrollmentRouter);
 const PdfRouter = require("./app/router/admin/PdfRouter");
 app.use(PdfRouter);
 
+//Handling Socket
+app.get("/chat", (req, res) => {
+  return res.render("chat");
+});
+
+io.on("connection", (socket) => {
+  console.log("A new user connected :", socket.id);
+
+  socket.on("message", (msg) => {
+    console.log(msg);
+
+    io.emit("message", {
+      text: msg,
+      sender: socket.id,
+    });
+  });
+});
+
 //If no page found
 app.use((req, res, next) => {
-    next({ status: 404, message: "Page Not Found" });
+  next({ status: 404, message: "Page Not Found" });
 });
 
 //++++++++++++++++++++++++  Basic error handling  ++++++++++++++++++++++++++
@@ -93,6 +110,6 @@ app.use(handlingErrors);
 
 //+++++++++++++++++  Creating Server  ++++++++++++++++++++++
 const port = 8080;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server started at ${port}`);
 });

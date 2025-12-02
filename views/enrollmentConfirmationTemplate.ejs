@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Emailt</title>
+</head>
+
+<body style="margin:0; padding:0; background:#f8f9fa; font-family:Arial, Helvetica, sans-serif;">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 30px 0;">
+        <tr>
+            <td align="center">
+
+                <!-- Outer Container -->
+                <table width="600" border="0" cellspacing="0" cellpadding="0"
+                    style="background:#ffffff; border-radius:8px; padding:30px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+
+                    <tr>
+                        <td>
+
+                            <!-- Heading -->
+                            <h2 style="color:#0d6efd; margin:0 0 20px 0; font-size:24px; font-weight:bold;">
+                                Confirmation Of Course Enrollment
+                            </h2>
+
+                            <p style="font-size:15px; color:#333; margin:0 0 15px;">
+                                Hello <strong>
+                                    <%= existingEnrollment.studentId.fullName %>
+                                </strong>,
+                            </p>
+
+                            <p style="font-size:15px; color:#333; margin:0 0 20px;">
+                                Congratualtion, Your Enrollment For <strong><%= existingEnrollment.courseId.title %> Course</strong> Has Been Approved.
+                                Wishing You A Happy Learning Journey.
+                            </p>
+
+                            <!-- Divider -->
+                            <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
+
+                            <!-- Footer Text -->
+                            <p style="font-size:12px; color:#6c757d; margin:0 0 5px;">
+                                This is an auto-generated email. Please do not reply.
+                            </p>
+
+                            <p style="font-size:12px; color:#6c757d; margin:0;">
+                                — Skillforge Team
+                            </p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

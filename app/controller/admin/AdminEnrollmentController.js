@@ -1,5 +1,8 @@
 const EnrollmentModel = require("../../model/EnrollmentModel");
 const { cloudinary } = require("../../helper/cloudFileUpload");
+const transporter = require("../../config/EmailConfig");
+const path = require("path");
+const ejs = require("ejs");
 
 class EnrollmentController {
   //get all enrollment
@@ -15,8 +18,8 @@ class EnrollmentController {
       },
       {
         $sort: {
-            enrolledOn: -1
-        }
+          enrolledOn: -1,
+        },
       },
       {
         $lookup: {
@@ -45,7 +48,7 @@ class EnrollmentController {
           path: "$studentDetails",
           preserveNullAndEmptyArrays: true,
         },
-      }
+      },
     ]);
 
     return res.render("adminPanel/enrollments", { enrollments });
@@ -60,7 +63,9 @@ class EnrollmentController {
 
     const existingEnrollment = await EnrollmentModel.findById(
       req.params.enrollmentId
-    );
+    )
+      .populate("studentId", "fullName email")
+      .populate("courseId", "title");
     if (!existingEnrollment) {
       req.flash("errorMsg", "Enrollment does not exists");
       return res.redirect("/admin/all-enrollment");
@@ -74,6 +79,27 @@ class EnrollmentController {
       "successMsg",
       `Enrollment status updated to ${existingEnrollment.status.toUpperCase()}`
     );
+
+    if (existingEnrollment.status === "approved") {
+      //template path
+      const templatePath = path.join(
+        process.cwd(),
+        "views/enrollmentConfirmationTemplate.ejs"
+      );
+
+      //Render EJS → HTML
+      const htmlContent = await ejs.renderFile(templatePath, {
+        existingEnrollment,
+      });
+
+      // Send password reset email via nodemailer
+      transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: existingEnrollment.studentId.email,
+        subject: "Confirm Enrollment Approval",
+        html: htmlContent,
+      });
+    }
     return res.redirect("/admin/all-enrollment");
   }
 
